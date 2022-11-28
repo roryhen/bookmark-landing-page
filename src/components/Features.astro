@@ -1,0 +1,24 @@
+---
+import features from '$content/sections/features.json'
+const { heading, snippet, tabs } = features
+---
+
+<section class="desktop-layout">
+  <div class="section">
+    <header class="header">
+      <h2 class="heading">{heading}</h2>
+      <p class="snippet">{snippet}</p>
+    </header>
+    <div></div>
+  </div>
+</section>
+
+<style>
+  .header {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    grid-template-columns: minmax(0, 33rem);
+    gap: var(--size-6);
+  }
+</style>

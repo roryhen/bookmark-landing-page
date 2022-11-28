@@ -1,0 +1,30 @@
+{
+  "links": [
+    {
+      "text": "Features",
+      "url": "#features"
+    },
+    {
+      "text": "Pricing",
+      "url": "#pricing"
+    },
+    {
+      "text": "Contact",
+      "url": "#contact"
+    }
+  ],
+  "social_links": [
+    {
+      "platform": "Facebook",
+      "url": "https://facebook.com/example"
+    },
+    {
+      "platform": "Twitter",
+      "url": "https://twitter.com/example"
+    }
+  ],
+  "call_to_action": {
+    "text": "Login",
+    "url": "/login"
+  }
+}

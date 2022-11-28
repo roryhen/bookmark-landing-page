@@ -1,0 +1,137 @@
+---
+import '@fontsource/rubik'
+import '@fontsource/rubik/400.css'
+import '@fontsource/rubik/500.css'
+import Header from '../components/Header.astro'
+import global from '$content/global.json'
+
+export interface Props {
+  title?: string
+}
+
+const { title } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title ? title : global.site_name}</title>
+  </head>
+  <body>
+    <Header />
+    <slot />
+  </body>
+</html>
+<style is:global>
+  @import 'open-props/postcss/style';
+  @import 'open-props/postcss/buttons';
+
+  :root {
+    --accent-1: hsl(231, 69%, 60%);
+    --accent-2: hsl(0, 94%, 66%);
+    --text-1: hsl(229, 31%, 21%);
+    --text-2: hsl(229, 8%, 48%);
+    --text-3: hsl(229, 8%, 34%);
+  }
+
+  html {
+    font-family: Rubik, system-ui, sans-serif;
+    background-color: #fff;
+  }
+
+  body {
+    margin: 0;
+    font-size: 1.125rem;
+  }
+
+  code {
+    font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+      DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  p {
+    margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  p {
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+
+  h1 {
+    font-size: var(--font-size-7);
+    font-weight: 500;
+  }
+
+  h2 {
+    font-size: var(--font-size-5);
+    font-weight: 500;
+  }
+
+  @media (min-width: 64rem) {
+    .desktop-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1280px) minmax(0, 1fr);
+    }
+
+    .desktop-layout > :where(*) {
+      grid-column: 2;
+    }
+  }
+
+  .section {
+    padding: var(--size-8) var(--size-5);
+  }
+
+  .link {
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: var(--font-letterspacing-4);
+  }
+
+  .link:not(.button):hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .button:hover {
+    transform: translateY(0.1rem);
+    box-shadow: var(--shadow-1);
+  }
+
+  .button {
+    display: inline-block;
+    background: var(--accent-1);
+    color: white;
+    border-radius: var(--radius-2);
+    padding: 0.875rem var(--size-4);
+    box-shadow: var(--shadow-2);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .button--secondary {
+    color: var(--text-3);
+    background-color: #f7f7f7;
+  }
+
+  .accent-1 {
+    background-color: var(--accent-1);
+  }
+
+  .accent-2 {
+    background-color: var(--accent-2);
+  }
+</style>

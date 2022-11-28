@@ -1,0 +1,103 @@
+---
+import hero from '$content/sections/hero.json'
+const { heading, snippet, featured_image, buttons } = hero
+---
+
+<section class="desktop-layout">
+  <div class="hero section">
+    <div class="content">
+      <h1 class="heading">{heading}</h1>
+      <p class="snippet">
+        {snippet}
+      </p>
+      <div class="actions">
+        {
+          buttons.map((button, i) => (
+            <a
+              href={button.url}
+              class={`button${i !== 0 ? ' button--secondary' : ''}`}
+            >
+              {button.text}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+    <div class="media">
+      <img
+        class="image"
+        src={featured_image.image}
+        alt={featured_image.alt}
+        width="657"
+        height="466"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    gap: var(--size-10);
+    align-items: center;
+  }
+
+  @media (min-width: 64rem) {
+    .hero {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .heading,
+  .snippet {
+    margin: 0;
+  }
+
+  .content {
+    order: 1;
+    display: grid;
+    gap: var(--size-7);
+  }
+
+  @media (min-width: 64rem) {
+    .content {
+      order: 0;
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: var(--size-4);
+  }
+
+  .media {
+    display: grid;
+    grid-template: 8rem auto 1rem / 12rem 1fr 1fr;
+  }
+
+  .image {
+    grid-row: 1 / span 2;
+    grid-column: 1 / span 2;
+    z-index: 1;
+  }
+
+  .media::before {
+    content: '';
+    display: block;
+    grid-row: 2 / span 2;
+    grid-column: 2;
+    border-radius: 1e5px 0 0 1e5px;
+    background-color: var(--accent-1);
+  }
+
+  .media::after {
+    content: '';
+    display: block;
+    grid-row: 2 / span 2;
+    grid-column: 3;
+    width: var(--size-2);
+    background-color: var(--accent-1);
+    box-shadow: 0 0 0 100vw var(--accent-1);
+    clip-path: inset(0 -100vw 0 0);
+  }
+</style>
