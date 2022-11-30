@@ -14,12 +14,17 @@
     "@fontsource/rubik": "^4.5.11",
     "astro": "^1.6.11",
     "astro-netlify-cms": "^0.3.4",
-    "open-props": "^1.5.0"
+    "feather-icons": "^4.29.0",
+    "open-props": "^1.5.1"
   },
   "devDependencies": {
+    "@types/feather-icons": "^4.29.0",
     "postcss": "^8.4.19",
     "postcss-preset-env": "^7.8.3",
     "prettier": "^2.8.0",
     "prettier-plugin-astro": "^0.7.0"
-  }
+  },
+  "browserslist": [
+    "> 1% and last 3 versions"
+  ]
 }

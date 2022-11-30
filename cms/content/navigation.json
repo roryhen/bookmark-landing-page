@@ -25,6 +25,6 @@
   ],
   "call_to_action": {
     "text": "Login",
-    "url": "/login"
+    "url": "/#login"
   }
 }

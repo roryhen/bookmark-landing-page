@@ -34,8 +34,10 @@ const { title } = Astro.props
     --accent-1: hsl(231, 69%, 60%);
     --accent-2: hsl(0, 94%, 66%);
     --text-1: hsl(229, 31%, 21%);
+    --text-1-hsl: 229 31% 21%;
     --text-2: hsl(229, 8%, 48%);
     --text-3: hsl(229, 8%, 34%);
+    --light-gray: hsl(254 9% 88%);
   }
 
   html {
@@ -45,12 +47,26 @@ const { title } = Astro.props
 
   body {
     margin: 0;
-    font-size: 1.125rem;
+
+    @media (--md-n-above) {
+      font-size: 1.125rem;
+    }
   }
 
   code {
     font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
       DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  }
+
+  button,
+  input {
+    font: inherit;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
   }
 
   h1,
@@ -67,20 +83,34 @@ const { title } = Astro.props
 
   p {
     color: var(--text-2);
-    line-height: 1.6;
+    line-height: var(--font-lineheight-4);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--text-1);
+    font-weight: var(--font-weight-5);
   }
 
   h1 {
-    font-size: var(--font-size-7);
-    font-weight: 500;
+    font-size: var(--font-size-5);
+
+    @media (--md-n-above) {
+      font-size: var(--font-size-7);
+    }
   }
 
   h2 {
-    font-size: var(--font-size-5);
-    font-weight: 500;
+    font-size: var(--font-size-4);
+
+    @media (--md-n-above) {
+      font-size: var(--font-size-5);
+    }
   }
 
-  @media (min-width: 64rem) {
+  @media (--lg-n-above) {
     .desktop-layout {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1280px) minmax(0, 1fr);
@@ -99,39 +129,27 @@ const { title } = Astro.props
     color: var(--text-3);
     text-transform: uppercase;
     letter-spacing: var(--font-letterspacing-4);
-  }
 
-  .link:not(.button):hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  .button:hover {
-    transform: translateY(0.1rem);
-    box-shadow: var(--shadow-1);
+    &:not(.button):hover {
+      color: var(--accent-2);
+    }
   }
 
   .button {
+    --button-color: var(--accent-1);
     display: inline-block;
-    background: var(--accent-1);
+    background: var(--button-color);
     color: white;
     border-radius: var(--radius-2);
     padding: 0.875rem var(--size-4);
     box-shadow: var(--shadow-2);
     font-size: 0.875rem;
     font-weight: 500;
-  }
 
-  .button--secondary {
-    color: var(--text-3);
-    background-color: #f7f7f7;
-  }
-
-  .accent-1 {
-    background-color: var(--accent-1);
-  }
-
-  .accent-2 {
-    background-color: var(--accent-2);
+    &:hover {
+      background: white;
+      box-shadow: inset 0 0 0 2px var(--button-color), var(--shadow-2);
+      color: var(--button-color);
+    }
   }
 </style>

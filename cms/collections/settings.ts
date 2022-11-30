@@ -12,13 +12,6 @@ export const settings: CmsCollection = {
       file: 'cms/content/global.json',
       fields: [
         {
-          label: 'Logo',
-          name: 'logo',
-          widget: 'object',
-          required: false,
-          fields: Image,
-        },
-        {
           label: 'Site Name',
           name: 'site_name',
           widget: 'string',
@@ -29,6 +22,21 @@ export const settings: CmsCollection = {
           name: 'site_desc',
           widget: 'text',
           required: false,
+        },
+        {
+          label: 'Logo',
+          name: 'logo',
+          widget: 'object',
+          required: false,
+          fields: Image,
+        },
+        {
+          label: 'Alternate Logo',
+          name: 'alt_logo',
+          hint: 'For mobile menu',
+          widget: 'object',
+          required: false,
+          fields: Image,
         },
       ],
     },

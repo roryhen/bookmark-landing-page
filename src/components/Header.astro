@@ -1,8 +1,22 @@
 ---
 import navigation from '$content/navigation.json'
 import global from '$content/global.json'
-const { links, call_to_action } = navigation
+import feather from 'feather-icons'
+
+type Social = 'facebook' | 'twitter' | 'instagram' | 'linkedin'
+
+const { links, call_to_action, social_links } = navigation
 ---
+
+<script>
+  let menus = document.querySelectorAll('.open-menu, .close-menu')
+  let links = document.querySelector('.links')
+  menus.forEach((menu) =>
+    menu.addEventListener('click', () => {
+      links?.classList.toggle('active')
+    })
+  )
+</script>
 
 <header class="desktop-layout">
   <div class="header">
@@ -11,8 +25,8 @@ const { links, call_to_action } = navigation
         {
           global.logo && (
             <img
-              src={global.logo}
-              alt={global.site_name}
+              src={global.logo.image}
+              alt={global.logo.alt}
               width="148"
               height="25"
             />
@@ -20,8 +34,34 @@ const { links, call_to_action } = navigation
         }
       </a>
     </div>
+    <button
+      type="button"
+      class="open-menu"
+      aria-label="Open Menu"
+      set:html={feather.icons.menu.toSvg()}
+    />
     <div class="links">
-      <nav>
+      <div class="top-bar">
+        <a href="/">
+          {
+            global.alt_logo && (
+              <img
+                src={global.alt_logo.image}
+                alt={global.alt_logo.alt}
+                width="148"
+                height="25"
+              />
+            )
+          }
+        </a>
+        <button
+          type="button"
+          class="close-menu"
+          aria-label="Close Menu"
+          set:html={feather.icons.x.toSvg()}
+        />
+      </div>
+      <nav class="nav">
         <ul class="nav-list">
           {
             links.map((link) => (
@@ -35,7 +75,7 @@ const { links, call_to_action } = navigation
           {
             call_to_action && (
               <li>
-                <a href={call_to_action.url} class="link button accent-2">
+                <a href={call_to_action.url} class="button">
                   {call_to_action.text}
                 </a>
               </li>
@@ -43,31 +83,167 @@ const { links, call_to_action } = navigation
           }
         </ul>
       </nav>
+      <ul class="social">
+        {
+          social_links.map(({ platform, url }) => (
+            <li>
+              <a
+                href={url}
+                set:html={feather.icons[platform.toLowerCase() as Social].toSvg(
+                  {
+                    width: 32,
+                    height: 32,
+                    stroke: 'white',
+                  } as feather.FeatherAttributes
+                )}
+              />
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </div>
 </header>
 
 <style>
+  @media (--md-n-below) {
+    header {
+      position: sticky;
+      inset-block-start: 0;
+
+      --t-duration: 0.5s;
+    }
+  }
+
   .header {
     display: grid;
     grid-auto-flow: column;
-    align-items: center;
     justify-content: space-between;
-    padding: var(--size-8) var(--size-5);
+    align-items: start;
+    padding: var(--size-7) var(--size-6);
     font-size: 0.875rem;
+    background-color: white;
+
+    @media (--md-n-above) {
+      align-items: center;
+      padding: var(--size-8) var(--size-5);
+    }
+  }
+
+  .top-bar {
+    padding: var(--size-7) var(--size-6);
+    color: white;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    line-height: 1;
+
+    @media (--md-n-above) {
+      display: none;
+    }
+  }
+
+  .links {
+    @media (--md-n-below) {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      position: fixed;
+      inset: 0;
+      background-color: hsl(var(--text-1-hsl) / 90%);
+      transition: opacity var(--t-duration) var(--ease-4),
+        visibilty var(--t-duration);
+      opacity: 0;
+      visibility: hidden;
+
+      @nest &.active {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
   }
 
   .nav-list {
-    margin: 0;
-    padding: 0;
     list-style: none;
     display: flex;
-    align-items: center;
     gap: var(--size-8);
+    align-items: center;
+    padding-inline-end: var(--size-7);
+
+    @media (--md-n-below) {
+      padding: 0 var(--size-6);
+      display: grid;
+      gap: 0;
+      text-align: center;
+      transition: translate var(--t-duration) var(--ease-4);
+      translate: 0 var(--size-3);
+
+      @nest .active & {
+        translate: 0 0;
+      }
+    }
   }
 
-  .link.button {
+  .button.button {
+    text-transform: uppercase;
     font-weight: 400;
-    padding: 0.75rem var(--size-7);
+    letter-spacing: var(--font-letterspacing-4);
+
+    @media (--md-n-below) {
+      display: block;
+      margin-block-start: var(--size-5);
+      background-color: transparent;
+      box-shadow: none;
+      border: 2px solid white;
+      font-size: var(--font-size-3);
+
+      &:hover {
+        background-color: transparent;
+        color: var(--accent-2);
+        border-color: var(--accent-2);
+        box-shadow: none;
+      }
+    }
+
+    @media (--md-n-above) {
+      --button-color: var(--accent-2);
+      padding: 0.75rem var(--size-7);
+    }
+  }
+
+  .link {
+    @media (--md-n-below) {
+      border-block-start: 1px solid hsl(0 100% 100% / 10%);
+      --text-3: white;
+      display: block;
+      font-size: var(--font-size-3);
+      padding: var(--size-4) 0;
+
+      &:last-child {
+        border-block-end: 1px solid hsl(0 100% 100% / 10%);
+      }
+    }
+  }
+
+  .open-menu,
+  .close-menu {
+    font-size: var(--font-size-3);
+    padding: var(--size-3);
+    margin: calc(var(--size-3) * -1);
+
+    @media (--md-n-above) {
+      display: none;
+    }
+  }
+
+  .social {
+    align-self: end;
+    display: flex;
+    justify-content: center;
+    gap: var(--size-7);
+    margin-block-end: var(--size-8);
+
+    @media (--md-n-above) {
+      display: none;
+    }
   }
 </style>

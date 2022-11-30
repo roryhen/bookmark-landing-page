@@ -1,4 +1,11 @@
 {
-  "logo": "/uploads/logo-bookmark.svg",
-  "site_name": "Bookmark - A Simple Bookmark Manager"
+  "site_name": "Bookmark - A Simple Bookmark Manager",
+  "logo": {
+    "image": "/uploads/logo-bookmark.svg",
+    "alt": "bookmark logo"
+  },
+  "alt_logo": {
+    "image": "/uploads/logo-bookmark-white.svg",
+    "alt": "bookmark white logo"
+  }
 }
