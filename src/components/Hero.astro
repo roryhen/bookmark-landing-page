@@ -1,6 +1,7 @@
 ---
 import hero from '$content/sections/hero.json'
-const { heading, snippet, featured_image, buttons } = hero
+
+let { heading, snippet, featured_image, buttons } = hero
 ---
 
 <section class="desktop-layout">
@@ -22,7 +23,7 @@ const { heading, snippet, featured_image, buttons } = hero
       <div class="actions">
         {
           buttons.map((button, i) => (
-            <a href={button.url} class={`button${i !== 0 ? ' default' : ''}`}>
+            <a href={button.url} class={`button${i !== 0 ? ' invert' : ''}`}>
               {button.text}
             </a>
           ))
@@ -65,10 +66,8 @@ const { heading, snippet, featured_image, buttons } = hero
     gap: var(--size-4);
   }
 
-  .default {
+  .invert {
     --button-color: var(--text-3);
-    color: var(--text-3);
-    background-color: #f7f7f7;
   }
 
   .media {

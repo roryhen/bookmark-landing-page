@@ -5,22 +5,30 @@ import feather from 'feather-icons'
 
 type Social = 'facebook' | 'twitter' | 'instagram' | 'linkedin'
 
-const { links, call_to_action, social_links } = navigation
+let { links, call_to_action, social_links } = navigation
 ---
 
 <script>
   let menus = document.querySelectorAll('.open-menu, .close-menu')
-  let links = document.querySelector('.links')
+  let linkMenu = document.querySelector<HTMLDivElement>('.link-menu')
   menus.forEach((menu) =>
     menu.addEventListener('click', () => {
-      links?.classList.toggle('active')
+      if (linkMenu) {
+        let currentState = linkMenu.getAttribute('data-state')
+        console.log(currentState)
+        if (currentState === 'active') {
+          linkMenu.setAttribute('data-state', 'inactive')
+        } else {
+          linkMenu.setAttribute('data-state', 'active')
+        }
+      }
     })
   )
 </script>
 
 <header class="desktop-layout">
   <div class="header">
-    <div class="logo">
+    <div class="logo light">
       <a href="/">
         {
           global.logo && (
@@ -34,13 +42,27 @@ const { links, call_to_action, social_links } = navigation
         }
       </a>
     </div>
+    <div class="logo dark">
+      <a href="/">
+        {
+          global.alt_logo && (
+            <img
+              src={global.alt_logo.image}
+              alt={global.alt_logo.alt}
+              width="148"
+              height="25"
+            />
+          )
+        }
+      </a>
+    </div>
     <button
       type="button"
       class="open-menu"
       aria-label="Open Menu"
       set:html={feather.icons.menu.toSvg()}
     />
-    <div class="links">
+    <div class="link-menu" data-state="inactive">
       <div class="top-bar">
         <a href="/">
           {
@@ -93,7 +115,7 @@ const { links, call_to_action, social_links } = navigation
                   {
                     width: 32,
                     height: 32,
-                    stroke: 'white',
+                    stroke: 'var(--surface-0)',
                   } as feather.FeatherAttributes
                 )}
               />
@@ -110,8 +132,23 @@ const { links, call_to_action, social_links } = navigation
     header {
       position: sticky;
       inset-block-start: 0;
+      z-index: 1;
 
       --t-duration: 0.5s;
+    }
+  }
+
+  .logo {
+    &.dark {
+      @media (--OSlight) {
+        display: none;
+      }
+    }
+
+    &.light {
+      @media (--OSdark) {
+        display: none;
+      }
     }
   }
 
@@ -122,7 +159,7 @@ const { links, call_to_action, social_links } = navigation
     align-items: start;
     padding: var(--size-7) var(--size-6);
     font-size: 0.875rem;
-    background-color: white;
+    background-color: var(--surface-1);
 
     @media (--md-n-above) {
       align-items: center;
@@ -132,7 +169,6 @@ const { links, call_to_action, social_links } = navigation
 
   .top-bar {
     padding: var(--size-7) var(--size-6);
-    color: white;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -143,7 +179,7 @@ const { links, call_to_action, social_links } = navigation
     }
   }
 
-  .links {
+  .link-menu {
     @media (--md-n-below) {
       display: grid;
       grid-template-rows: auto auto 1fr;
@@ -155,7 +191,7 @@ const { links, call_to_action, social_links } = navigation
       opacity: 0;
       visibility: hidden;
 
-      @nest &.active {
+      @nest &[data-state='active'] {
         opacity: 1;
         visibility: visible;
       }
@@ -193,7 +229,7 @@ const { links, call_to_action, social_links } = navigation
       margin-block-start: var(--size-5);
       background-color: transparent;
       box-shadow: none;
-      border: 2px solid white;
+      border: 2px solid var(--surface-0);
       font-size: var(--font-size-3);
 
       &:hover {
@@ -213,7 +249,7 @@ const { links, call_to_action, social_links } = navigation
   .link {
     @media (--md-n-below) {
       border-block-start: 1px solid hsl(0 100% 100% / 10%);
-      --text-3: white;
+      --text-3: var(--surface-0);
       display: block;
       font-size: var(--font-size-3);
       padding: var(--size-4) 0;
@@ -226,6 +262,7 @@ const { links, call_to_action, social_links } = navigation
 
   .open-menu,
   .close-menu {
+    color: var(--text-1);
     font-size: var(--font-size-3);
     padding: var(--size-3);
     margin: calc(var(--size-3) * -1);

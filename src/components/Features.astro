@@ -1,7 +1,45 @@
 ---
 import features from '$content/sections/features.json'
-const { heading, snippet, tabs } = features
+
+let { heading, snippet, tabs } = features
 ---
+
+<script>
+  import EmblaCarousel from 'embla-carousel'
+
+  let buttons = document.querySelectorAll('.tab-button')
+
+  let emblaNode = document.querySelector<HTMLDivElement>('.embla__viewport')
+  let embla = EmblaCarousel(emblaNode!, {
+    loop: false,
+    skipSnaps: false,
+    speed: 15,
+  })
+
+  let syncTabs = () => {
+    let index = embla.selectedScrollSnap()
+    buttons.forEach((button) => {
+      let asNum = +(button.getAttribute('data-id') ?? 0)
+      if (asNum === index) {
+        button.setAttribute('data-state', 'active')
+      } else {
+        button.setAttribute('data-state', 'inactive')
+      }
+    })
+  }
+
+  embla.on('init', syncTabs)
+  embla.on('select', syncTabs)
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      if (button) {
+        let asNum = +(button.getAttribute('data-id') ?? 0)
+        embla.scrollTo(asNum)
+      }
+    })
+  })
+</script>
 
 <section class="desktop-layout">
   <div class="section">
@@ -9,80 +47,183 @@ const { heading, snippet, tabs } = features
       <h2 class="heading">{heading}</h2>
       <p class="snippet">{snippet}</p>
     </header>
-    <div>
+    <div class="embla">
       <ul class="tabs">
         {
-          tabs.map(({ tab_title }) => (
+          tabs.map(({ tab_title }, i) => (
             <li class="tab">
-              <button class="tab-button" type="button">
+              <button
+                class="tab-button"
+                type="button"
+                data-id={i}
+                data-state="inactive"
+              >
                 <h3 class="tab-heading">{tab_title}</h3>
               </button>
             </li>
           ))
         }
       </ul>
-      <ul class="tab-panels">
-        {
-          tabs.map(({ tab_content }) => (
-            <li class="tab-panel">
-              <div class="media">
-                <img
-                  class="image"
-                  src={tab_content.featured_image.image}
-                  alt={tab_content.featured_image.alt}
-                  width="657"
-                  height="466"
-                />
-              </div>
-              <div class="content">
-                <h2 class="heading">{tab_content.heading}</h2>
-                <p class="snippet">{tab_content.snippet}</p>
-                <div class="actions">
-                  {tab_content.buttons.map((button, i) => (
-                    <a
-                      href={button.url}
-                      class={`button${i !== 0 ? ' default' : ''}`}
-                    >
-                      {button.text}
-                    </a>
-                  ))}
+      <div class="embla__viewport">
+        <ul class="tab-panels embla__container">
+          {
+            tabs.map(({ tab_content }) => (
+              <li class="tab-panel embla__slide">
+                <div class="media">
+                  <img
+                    class="image"
+                    src={tab_content.featured_image.image}
+                    alt={tab_content.featured_image.alt}
+                    width="657"
+                    height="466"
+                  />
                 </div>
-              </div>
-            </li>
-          ))
-        }
-      </ul>
+                <div class="content">
+                  <h2 class="heading">{tab_content.heading}</h2>
+                  <p class="snippet">{tab_content.snippet}</p>
+                  <div class="actions">
+                    {tab_content.buttons.map((button, i) => (
+                      <a
+                        href={button.url}
+                        class={`button${i !== 0 ? ' default' : ''}`}
+                      >
+                        {button.text}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
+  .section {
+    padding: var(--size-8) 0;
+
+    @media (--md-n-above) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .embla__container {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 90%;
+    column-gap: 10vw;
+  }
+
+  .embla__viewport {
+    overflow: hidden;
+    width: 100%;
+  }
+
   .header {
+    padding: 0 var(--size-5);
     display: grid;
     justify-content: center;
     text-align: center;
-    grid-template-columns: minmax(0, 33rem);
-    gap: var(--size-6);
+    grid-template-columns: minmax(0, 40ch);
+    gap: var(--size-3);
+
+    @media (--md-n-above) {
+      gap: var(--size-5);
+    }
   }
 
   .tabs {
+    padding: 0 var(--size-5);
     display: grid;
     text-align: center;
     margin: var(--size-7) 0 var(--size-10);
+
+    @media (--md-n-above) {
+      margin: var(--size-8) 0 var(--size-10);
+      grid-auto-flow: column;
+      grid-auto-columns: auto;
+      justify-content: center;
+    }
   }
 
   .tab {
-    border-block-start: 1px solid var(--light-gray);
-    padding: var(--size-3) 0;
+    border-block-start: 1px solid var(--surface-2);
+
+    @media (--md-n-above) {
+      border-block-start: 0;
+      border-block-end: 1px solid var(--surface-2);
+    }
 
     &:last-child {
-      border-block-end: 1px solid var(--light-gray);
+      border-block-end: 1px solid var(--surface-2);
+    }
+  }
+
+  .tab-button {
+    background-color: transparent;
+    padding: var(--size-5);
+    border-radius: 0;
+    position: relative;
+
+    @media (--md-n-above) {
+      padding: var(--size-7) var(--size-8);
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      inset-block-end: 0;
+      scale: 0.85 0;
+      block-size: var(--size-1);
+      inline-size: 80%;
+      background-color: var(--accent-2);
+      transition: scale 0.3s var(--ease-4);
+      transform-origin: bottom;
+
+      @media (--md-n-above) {
+        scale: 1 0;
+        inline-size: 100%;
+      }
+    }
+
+    &[data-state='active']::after {
+      scale: 0.85 1;
+
+      @media (--md-n-above) {
+        scale: 1 1;
+      }
     }
   }
 
   .tab-heading {
     font-size: var(--font-size-2);
     font-weight: var(--font-weight-4);
+    color: var(--text-2);
+
+    @nest [data-state='active'] & {
+      color: var(--text-1);
+    }
+  }
+
+  .content {
+    position: relative;
+    margin-block-start: var(--size-8);
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: var(--size-3);
+
+    @media (--md-n-above) {
+      margin-block-start: 0;
+      gap: var(--size-7);
+      align-content: start;
+      justify-items: start;
+      text-align: start;
+    }
   }
 
   .image {
@@ -95,27 +236,56 @@ const { heading, snippet, tabs } = features
   .media {
     display: grid;
     grid-template: 1fr 4fr 1fr / 1fr 4fr 1fr;
+
+    &::before {
+      content: '';
+      display: block;
+      grid-area: 2 / 2 / -1 / 3;
+      border-radius: 0 var(--radius-round) var(--radius-round) 0;
+      background-color: var(--accent-1);
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      grid-area: 2 / 1 / -1 / 2;
+      background-color: var(--accent-1);
+      box-shadow: 0 0 0 100vw var(--accent-1);
+      clip-path: inset(0 -5px 0 -5vw);
+      z-index: -1;
+
+      @media (--xl-n-above) {
+        clip-path: inset(0 -5px 0 -25vw);
+      }
+    }
   }
 
-  .tab-panel:nth-child(n + 2) .media {
-    grid-template: 1fr 4fr 1rem / 1fr 4fr 1fr;
-  }
+  .tab-panel {
+    @media (--md-n-above) {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) min(30%, 50ch);
+      justify-content: center;
+      align-items: center;
+      gap: calc(var(--size-3) + 8%);
+      max-width: 1280px;
+    }
 
-  .media::before {
-    content: '';
-    display: block;
-    grid-area: 2 / 2 / -1 / 3;
-    border-radius: 0 var(--radius-round) var(--radius-round) 0;
-    background-color: var(--accent-1);
-  }
+    @media (--xl-n-above) {
+      position: relative;
 
-  .media::after {
-    content: '';
-    display: block;
-    grid-area: 2 / 1 / -1 / 2;
-    background-color: var(--accent-1);
-    box-shadow: 0 0 0 100vw var(--accent-1);
-    clip-path: inset(0 -5px 0 -100vw);
-    z-index: -1;
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        inset-inline-start: calc(50% + 25vw);
+        block-size: 100%;
+        inline-size: 25vw;
+        background-color: var(--surface-1);
+      }
+    }
+
+    &:nth-child(n + 2) .media {
+      grid-template: 1fr 4fr 1rem / 1fr 4fr 1fr;
+    }
   }
 </style>

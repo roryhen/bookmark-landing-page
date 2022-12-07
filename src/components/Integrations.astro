@@ -1,0 +1,82 @@
+---
+import integrations from '$content/sections/integrations.json'
+import Card from './Card.astro'
+
+let { heading, snippet, integration } = integrations
+---
+
+<section class="desktop-layout">
+  <div class="section">
+    <header class="header">
+      <h2 class="heading">{heading}</h2>
+      <p class="snippet">{snippet}</p>
+    </header>
+    <ul class="list">
+      {
+        integration.map((int) => (
+          <Card>
+            <img src={int.image} alt={int.alt} slot="header" />
+            <div slot="body">
+              <h3 class="title">{int.title}</h3>
+              <p class="detail">{int.detail}</p>
+            </div>
+            <a class="button" href={int.url} slot="footer">
+              {int.text}
+            </a>
+          </Card>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .header {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    grid-template-columns: minmax(0, 40ch);
+    gap: var(--size-3);
+    margin-block-end: var(--size-8);
+
+    @media (--md-n-above) {
+      gap: var(--size-5);
+    }
+  }
+
+  .list {
+    display: grid;
+    gap: var(--size-8);
+
+    @media (--md-n-above) {
+      grid-template-rows: repeat(2, var(--size-7)) auto repeat(2, var(--size-7));
+      grid-auto-columns: minmax(0, 18rem);
+      gap: 0 var(--size-7);
+      justify-content: center;
+
+      & > :global(:nth-child(1)) {
+        grid-row: 1 / span 3;
+      }
+
+      & > :global(:nth-child(2)) {
+        grid-row: 2 / span 3;
+      }
+
+      & > :global(:nth-child(3)) {
+        grid-row: 3 / span 3;
+      }
+    }
+  }
+
+  .title {
+    margin-block-end: var(--size-2);
+  }
+
+  .detail {
+    font-size: var(--font-size-1);
+  }
+
+  .button {
+    display: block;
+  }
+</style>
