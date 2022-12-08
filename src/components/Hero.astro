@@ -6,7 +6,7 @@ let { heading, snippet, featured_image, buttons } = hero
 
 <section class="desktop-layout">
   <div class="hero section">
-    <div class="media">
+    <div class="media" data-enter="right">
       <img
         class="image"
         src={featured_image.image}
@@ -15,7 +15,7 @@ let { heading, snippet, featured_image, buttons } = hero
         height="466"
       />
     </div>
-    <div class="content">
+    <div class="content" data-enter data-duration="3">
       <h1 class="heading">{heading}</h1>
       <p class="snippet">
         {snippet}
@@ -97,6 +97,7 @@ let { heading, snippet, featured_image, buttons } = hero
   .media::after {
     content: '';
     display: block;
+    margin-inline-start: -1px;
     grid-area: 2 / 3 / 4 / 4;
     background-color: var(--accent-1);
     box-shadow: 0 0 0 100vw var(--accent-1);

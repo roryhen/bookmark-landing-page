@@ -6,7 +6,7 @@ export type Props = {
 let { align = 'center' } = Astro.props
 ---
 
-<li class={`card ${align}`}>
+<li class={`card ${align}`} {...Astro.props}>
   <div class="header">
     <slot name="header" />
   </div>

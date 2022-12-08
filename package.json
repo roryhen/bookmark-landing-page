@@ -16,6 +16,7 @@
     "astro-netlify-cms": "^0.3.4",
     "embla-carousel": "^7.0.5",
     "feather-icons": "^4.29.0",
+    "gsap": "^3.11.3",
     "open-props": "^1.5.1"
   },
   "devDependencies": {

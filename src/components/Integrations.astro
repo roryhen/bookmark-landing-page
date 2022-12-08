@@ -7,14 +7,14 @@ let { heading, snippet, integration } = integrations
 
 <section class="desktop-layout">
   <div class="section">
-    <header class="header">
+    <header class="header" data-enter>
       <h2 class="heading">{heading}</h2>
       <p class="snippet">{snippet}</p>
     </header>
     <ul class="list">
       {
-        integration.map((int) => (
-          <Card>
+        integration.map((int, i) => (
+          <Card data-enter="bottom" data-delay={i * 0.5}>
             <img src={int.image} alt={int.alt} slot="header" />
             <div slot="body">
               <h3 class="title">{int.title}</h3>
