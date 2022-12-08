@@ -5,7 +5,7 @@ let { heading, snippet, tabs } = features
 ---
 
 <script>
-  import EmblaCarousel from 'embla-carousel'
+  let { default: EmblaCarousel } = await import('embla-carousel')
 
   let buttons = document.querySelectorAll('.tab-button')
 
@@ -28,7 +28,10 @@ let { heading, snippet, tabs } = features
     })
   }
 
-  embla.on('init', syncTabs)
+  embla.on('init', () => {
+    embla.reInit()
+    syncTabs()
+  })
   embla.on('select', syncTabs)
 
   buttons.forEach((button) => {
@@ -64,7 +67,7 @@ let { heading, snippet, tabs } = features
           ))
         }
       </ul>
-      <div class="embla__viewport" data-enter="left">
+      <div class="embla__viewport" data-enter>
         <ul class="tab-panels embla__container">
           {
             tabs.map(({ tab_content }) => (

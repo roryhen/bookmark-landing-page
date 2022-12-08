@@ -26,11 +26,12 @@ const { title } = Astro.props
     <slot />
 
     <script>
-      import gsap from 'gsap'
-      import { ScrollTrigger } from 'gsap/ScrollTrigger'
+      let { gsap } = await import('gsap')
+      let { ScrollTrigger } = await import('gsap/ScrollTrigger')
+
       gsap.registerPlugin(ScrollTrigger)
 
-      // gsap.set('[data-enter]', { autoAlpha: 1 })
+      gsap.set('[data-enter]', { autoAlpha: 1 })
 
       let dirX: Record<string, any> = {
         left: -1000,
@@ -205,9 +206,9 @@ const { title } = Astro.props
     }
   }
 
-  /* hide gsap animated elements until it inits */
+  /* hide gsap animated elements until initialization */
   [data-enter] {
-    /* visibility: hidden; */
+    visibility: hidden;
   }
 
   .section {
