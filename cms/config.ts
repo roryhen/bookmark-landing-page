@@ -8,6 +8,7 @@ export const netlifyCMSConfig = NetlifyCMS({
       name: 'git-gateway',
       branch: 'main',
     },
+    site_url: 'https://bookmarkmanagersite.netlify.app/',
     media_folder: 'public/uploads',
     public_folder: '/uploads',
     collections: [settings, sections],
