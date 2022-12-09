@@ -3,6 +3,7 @@ import '@fontsource/rubik'
 import '@fontsource/rubik/400.css'
 import '@fontsource/rubik/500.css'
 import 'open-props/postcss/style'
+
 import Header from '../components/Header.astro'
 import global from '$content/global.json'
 
@@ -45,47 +46,32 @@ const { title } = Astro.props
         center: 0,
       }
 
-      let mm = gsap.matchMedia()
-      let breakPoint = 768
+      document.querySelectorAll('[data-enter]').forEach((node) => {
+        let timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: node,
+            start: 'top 90%',
+          },
+        })
 
-      mm.add(
-        {
-          isDesktop: `(min-width: ${breakPoint}px)`,
-          isMobile: `(max-width: ${breakPoint - 1}px)`,
-          reduceMotion: '(prefers-reduced-motion: reduce)',
-        },
-        (context) => {
-          let { isDesktop, isMobile, reduceMotion } = context.conditions!
-
-          document.querySelectorAll('[data-enter]').forEach((node) => {
-            let timeline = gsap.timeline({
-              scrollTrigger: {
-                trigger: node,
-                toggleActions: 'restart none none reset',
-                start: `top ${isMobile ? 'center' : 'bottom'}`,
-              },
-            })
-
-            timeline.from(node, {
-              x: (_, target) => {
-                let dir = target.dataset.enter
-                return dirX[dir in dirX && dir]
-              },
-              y: (_, target) => {
-                let dir = target.dataset.enter
-                return dirY[dir in dirY && dir]
-              },
-              delay: (_, target) => target.dataset.delay,
-              opacity: 0,
-              duration: (_, target) => {
-                let dur = target.dataset.duration
-                return dur ? dur : 1.5
-              },
-              ease: 'power4.out',
-            })
-          })
-        }
-      )
+        timeline.from(node, {
+          x: (_, target) => {
+            let dir = target.dataset.enter
+            return dirX[dir in dirX && dir]
+          },
+          y: (_, target) => {
+            let dir = target.dataset.enter
+            return dirY[dir in dirY && dir]
+          },
+          delay: (_, target) => target.dataset.delay,
+          opacity: 0,
+          duration: (_, target) => {
+            let dur = target.dataset.duration
+            return dur ? dur : 1.5
+          },
+          ease: 'power4.out',
+        })
+      })
     </script>
   </body>
 </html>

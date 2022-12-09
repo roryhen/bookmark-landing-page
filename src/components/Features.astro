@@ -28,10 +28,7 @@ let { heading, snippet, tabs } = features
     })
   }
 
-  embla.on('init', () => {
-    embla.reInit()
-    syncTabs()
-  })
+  embla.on('init', syncTabs)
   embla.on('select', syncTabs)
 
   buttons.forEach((button) => {
@@ -54,7 +51,7 @@ let { heading, snippet, tabs } = features
       <ul class="tabs">
         {
           tabs.map(({ tab_title }, i) => (
-            <li class="tab">
+            <li class="tab" data-enter="bottom" data-delay={0.1 * i}>
               <button
                 class="tab-button"
                 type="button"
@@ -118,6 +115,7 @@ let { heading, snippet, tabs } = features
     grid-auto-flow: column;
     grid-auto-columns: 90%;
     column-gap: 10vw;
+    justify-items: center;
   }
 
   .embla__viewport {

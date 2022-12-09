@@ -5,9 +5,11 @@ module.exports = {
     presetEnv({
       stage: false,
       autoprefixer: false,
+      importFrom: require.resolve('open-props/media'),
       features: {
         'nesting-rules': true,
         'custom-media-queries': true,
+        'media-query-ranges': true,
       },
     }),
   ],
