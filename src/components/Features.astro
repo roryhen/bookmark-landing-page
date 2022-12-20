@@ -1,5 +1,6 @@
 ---
 import features from '$content/sections/features.json'
+import SectionHeader from './SectionHeader.astro'
 
 let { heading, snippet, tabs } = features
 ---
@@ -7,7 +8,7 @@ let { heading, snippet, tabs } = features
 <script>
   let { default: EmblaCarousel } = await import('embla-carousel')
 
-  let buttons = document.querySelectorAll('.tab-button')
+  let buttons = document.querySelectorAll<HTMLButtonElement>('.tab-button')
 
   let emblaNode = document.querySelector<HTMLDivElement>('.embla__viewport')
   let embla = EmblaCarousel(emblaNode!, {
@@ -16,14 +17,14 @@ let { heading, snippet, tabs } = features
     speed: 15,
   })
 
-  let syncTabs = () => {
+  function syncTabs() {
     let index = embla.selectedScrollSnap()
     buttons.forEach((button) => {
-      let asNum = +(button.getAttribute('data-id') ?? 0)
+      let asNum = +(button.dataset.id ?? 0)
       if (asNum === index) {
-        button.setAttribute('data-state', 'active')
+        button.dataset.state = 'active'
       } else {
-        button.setAttribute('data-state', 'inactive')
+        button.dataset.state = 'inactive'
       }
     })
   }
@@ -34,24 +35,24 @@ let { heading, snippet, tabs } = features
   buttons.forEach((button) => {
     button.addEventListener('click', () => {
       if (button) {
-        let asNum = +(button.getAttribute('data-id') ?? 0)
+        let asNum = +(button.dataset.id ?? 0)
         embla.scrollTo(asNum)
       }
     })
   })
 </script>
 
-<section class="desktop-layout">
-  <div class="section">
-    <header class="header" data-enter>
-      <h2 class="heading">{heading}</h2>
-      <p class="snippet">{snippet}</p>
-    </header>
+<section>
+  <div class="wrapper">
+    <SectionHeader padding>
+      <h2>{heading}</h2>
+      <p>{snippet}</p>
+    </SectionHeader>
     <div class="embla">
-      <ul class="tabs">
+      <ul class="tabs" data-group data-enter="bottom" data-stagger="0.1">
         {
           tabs.map(({ tab_title }, i) => (
-            <li class="tab" data-enter="bottom" data-delay={0.1 * i}>
+            <li class="tab">
               <button
                 class="tab-button"
                 type="button"
@@ -102,7 +103,7 @@ let { heading, snippet, tabs } = features
 </section>
 
 <style>
-  .section {
+  .wrapper {
     padding: var(--size-8) 0;
 
     @media (--md-n-above) {
@@ -121,19 +122,6 @@ let { heading, snippet, tabs } = features
   .embla__viewport {
     overflow: hidden;
     width: 100%;
-  }
-
-  .header {
-    padding: 0 var(--size-5);
-    display: grid;
-    justify-content: center;
-    text-align: center;
-    grid-template-columns: minmax(0, 40ch);
-    gap: var(--size-3);
-
-    @media (--md-n-above) {
-      gap: var(--size-5);
-    }
   }
 
   .tabs {

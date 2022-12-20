@@ -1,6 +1,24 @@
 {
   "heading": "Frequently Asked Questions",
-  "snippet": "Here are some of our FAQs. IF you have any other questions you'd like answered please feel free to email us.",
+  "snippet": "Here are some of our FAQs. If you have any other questions you'd like answered please feel free to email us.",
   "text": "More Info",
-  "url": "#more-info"
+  "url": "#more-info",
+  "faqs_list": [
+    {
+      "question": "What is Bookmark?",
+      "answer": "Et pharetra pharetra massa massa ultricies. Augue lacus viverra vitae congue eu consequat ac. Eget arcu dictum varius duis at consectetur lorem donec massa. Egestas sed tempus urna et. Laoreet id donec ultrices tincidunt arcu non. Non enim praesent elementum facilisis. Pretium fusce id velit ut tortor pretium viverra suspendisse. "
+    },
+    {
+      "question": "How can I request a new browser?",
+      "answer": "Pharetra massa massa ultricies mi quis. Dui ut ornare lectus sit amet est placerat in egestas. Dui vivamus arcu felis bibendum ut tristique. Semper quis lectus nulla at volutpat. Egestas egestas fringilla phasellus faucibus scelerisque. Libero justo laoreet sit amet cursus sit amet. Vivamus at augue eget arcu dictum varius. Arcu felis bibendum ut tristique. Dignissim enim sit amet venenatis. Fermentum leo vel orci porta non pulvinar neque."
+    },
+    {
+      "question": "Is there a mobile app?",
+      "answer": "Enim ut tellus elementum sagittis vitae et leo duis ut. Massa sed elementum tempus egestas. Sapien faucibus et molestie ac feugiat sed. Vitae suscipit tellus mauris a diam. Dictum at tempor commodo ullamcorper. Turpis egestas sed tempus urna et pharetra pharetra. "
+    },
+    {
+      "answer": "Orci dapibus ultrices in iaculis nunc sed. Vitae congue mauris rhoncus aenean vel elit. Cursus sit amet dictum sit amet justo donec. Pretium viverra suspendisse potenti nullam ac tortor vitae. Et netus et malesuada fames ac turpis egestas sed. Ut etiam sit amet nisl purus.",
+      "question": "What about other Chromium browsers?"
+    }
+  ]
 }

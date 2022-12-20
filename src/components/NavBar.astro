@@ -9,25 +9,27 @@ let { links, call_to_action, social_links } = navigation
 ---
 
 <script>
-  let menus = document.querySelectorAll('.open-menu, .close-menu')
+  let menus = document.querySelectorAll<HTMLButtonElement>(
+    '.open-menu, .close-menu'
+  )
   let linkMenu = document.querySelector<HTMLDivElement>('.link-menu')
   menus.forEach((menu) =>
     menu.addEventListener('click', () => {
       if (linkMenu) {
-        let currentState = linkMenu.getAttribute('data-state')
+        let currentState = linkMenu.dataset.state
         console.log(currentState)
         if (currentState === 'active') {
-          linkMenu.setAttribute('data-state', 'inactive')
+          linkMenu.dataset.state = 'inactive'
         } else {
-          linkMenu.setAttribute('data-state', 'active')
+          linkMenu.dataset.state = 'active'
         }
       }
     })
   )
 </script>
 
-<header class="desktop-layout" data-enter data-delay="1.25" data-duration="3">
-  <div class="header">
+<header class="desktop-layout" data-enter data-delay="1.25" data-duration="2">
+  <div class="nav-bar">
     <div class="logo light">
       <a href="/">
         {
@@ -115,7 +117,6 @@ let { links, call_to_action, social_links } = navigation
                   {
                     width: 32,
                     height: 32,
-                    stroke: 'var(--surface-0)',
                   } as feather.FeatherAttributes
                 )}
               />
@@ -132,9 +133,8 @@ let { links, call_to_action, social_links } = navigation
     header {
       position: sticky;
       inset-block-start: 0;
+      transform: none !important;
       z-index: 1;
-
-      --t-duration: 0.5s;
     }
   }
 
@@ -152,7 +152,7 @@ let { links, call_to_action, social_links } = navigation
     }
   }
 
-  .header {
+  .nav-bar {
     display: grid;
     grid-auto-flow: column;
     justify-content: space-between;
@@ -186,8 +186,7 @@ let { links, call_to_action, social_links } = navigation
       position: fixed;
       inset: 0;
       background-color: hsl(var(--text-1-hsl) / 90%);
-      transition: opacity var(--t-duration) var(--ease-4),
-        visibilty var(--t-duration);
+      transition: opacity 0.5s var(--ease-4), visibilty 0.5s;
       opacity: 0;
       visibility: hidden;
 
@@ -210,10 +209,10 @@ let { links, call_to_action, social_links } = navigation
       display: grid;
       gap: 0;
       text-align: center;
-      transition: translate var(--t-duration) var(--ease-4);
+      transition: translate 0.5s var(--ease-4);
       translate: 0 var(--size-3);
 
-      @nest .active & {
+      @nest [data-state='active'] & {
         translate: 0 0;
       }
     }
@@ -285,6 +284,10 @@ let { links, call_to_action, social_links } = navigation
 
     @media (--md-n-above) {
       display: none;
+    }
+
+    & a {
+      color: var(--surface-0);
     }
   }
 </style>

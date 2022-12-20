@@ -1,0 +1,36 @@
+---
+export type Props = {
+  left?: boolean
+  padding?: boolean
+}
+
+let { left = false, padding = false } = Astro.props
+---
+
+<header class:list={['header', { left, padding }]} data-enter>
+  <slot />
+</header>
+
+<style>
+  .header {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    grid-template-columns: minmax(0, 44ch);
+    margin-block-end: var(--size-8);
+    gap: var(--size-3);
+
+    @media (--md-n-above) {
+      gap: var(--size-5);
+    }
+
+    &.left {
+      text-align: start;
+      justify-content: start;
+    }
+
+    &.padding {
+      padding: 0 var(--size-5);
+    }
+  }
+</style>

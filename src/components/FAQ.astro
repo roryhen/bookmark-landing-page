@@ -1,0 +1,120 @@
+---
+import features from '$content/sections/faqs.json'
+import SectionHeader from './SectionHeader.astro'
+import feather from 'feather-icons'
+
+let { heading, snippet, text, url, faqs_list } = features
+---
+
+<script>
+  let { gsap } = await import('gsap')
+
+  let tabs = document.querySelectorAll<HTMLLIElement>('.acc-item')
+  let headings = document.querySelectorAll<HTMLHeadingElement>('.acc-heading')
+
+  function setTabs(e: MouseEvent) {
+    let heading = e.currentTarget as HTMLHeadingElement
+    let id = +(heading.dataset.id ?? 0)
+    tabs.forEach((tab) => {
+      let asNum = +(tab.dataset.id ?? 0)
+      let isInactive = tab.dataset.state !== 'active'
+      if (asNum === id && isInactive) {
+        tab.dataset.state = 'active'
+        gsap.to(tab.querySelector('.acc-panel'), {
+          height: 'auto',
+          duration: 0.3,
+        })
+      } else {
+        tab.dataset.state = 'inactive'
+        gsap.to(tab.querySelector('.acc-panel'), {
+          height: '0',
+          duration: 0.3,
+        })
+      }
+    })
+  }
+
+  headings.forEach((heading) => {
+    heading.addEventListener('click', setTabs)
+  })
+</script>
+
+<section class="desktop-layout">
+  <div class="faq section-padding">
+    <SectionHeader>
+      <h2>{heading}</h2>
+      <p>{snippet}</p>
+    </SectionHeader>
+    <ul class="accordion">
+      {
+        faqs_list.map((faq, i) => (
+          <li class="acc-item" data-state="inactive" data-id={i}>
+            <h3 class="acc-heading" data-id={i}>
+              <button class="acc-button">
+                {faq.question}
+                <span
+                  class="icon"
+                  set:html={feather.icons['chevron-down'].toSvg({
+                    width: 32,
+                    height: 32,
+                  } as feather.FeatherAttributes)}
+                />
+              </button>
+            </h3>
+            <div class="acc-panel" data-id={i}>
+              <p class="acc-content">{faq.answer}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+    <a href={url} class="button">{text}</a>
+  </div>
+</section>
+
+<style>
+  .faq {
+    display: grid;
+    grid-template-columns: minmax(0, 40rem);
+    justify-content: center;
+  }
+
+  .acc-button {
+    font-size: var(--font-size-3);
+    font-weight: var(--font-weight-4);
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--size-3);
+    border-block-end: 1px solid var(--surface-2);
+    padding: var(--size-3) 0;
+    text-align: start;
+    color: var(--text-3);
+  }
+
+  .icon {
+    color: var(--accent-1);
+    transition: color 0.3s var(--ease-4), rotate 0.3s var(--ease-4);
+  }
+
+  [data-state='active'] .icon {
+    color: var(--accent-2);
+    rotate: -180deg;
+  }
+
+  .acc-panel {
+    overflow: hidden;
+    height: 0;
+    padding: 0;
+  }
+
+  .acc-content {
+    padding: var(--size-3) 0;
+  }
+
+  .button {
+    margin-block-start: var(--size-8);
+    justify-self: center;
+  }
+</style>

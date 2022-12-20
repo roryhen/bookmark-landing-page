@@ -1,20 +1,21 @@
 ---
 import integrations from '$content/sections/integrations.json'
 import Card from './Card.astro'
+import SectionHeader from './SectionHeader.astro'
 
 let { heading, snippet, integration } = integrations
 ---
 
 <section class="desktop-layout">
-  <div class="section">
-    <header class="header" data-enter>
+  <div class="section-padding">
+    <SectionHeader>
       <h2 class="heading">{heading}</h2>
       <p class="snippet">{snippet}</p>
-    </header>
-    <ul class="list">
+    </SectionHeader>
+    <ul class="list" data-group data-enter="bottom" data-stagger="0.3">
       {
-        integration.map((int, i) => (
-          <Card data-enter="bottom" data-delay={i * 0.5}>
+        integration.map((int) => (
+          <Card>
             <img src={int.image} alt={int.alt} slot="header" />
             <div slot="body">
               <h3 class="title">{int.title}</h3>
@@ -31,19 +32,6 @@ let { heading, snippet, integration } = integrations
 </section>
 
 <style>
-  .header {
-    display: grid;
-    justify-content: center;
-    text-align: center;
-    grid-template-columns: minmax(0, 40ch);
-    gap: var(--size-3);
-    margin-block-end: var(--size-8);
-
-    @media (--md-n-above) {
-      gap: var(--size-5);
-    }
-  }
-
   .list {
     display: grid;
     gap: var(--size-8);
