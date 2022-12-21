@@ -133,7 +133,7 @@ export const sections: CmsCollection = {
       fields: [
         {
           label: 'Subheading',
-          name: 'subeading',
+          name: 'subheading',
           widget: 'string',
           required: false,
         },

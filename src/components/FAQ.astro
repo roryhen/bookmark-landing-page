@@ -45,7 +45,7 @@ let { heading, snippet, text, url, faqs_list } = features
       <h2>{heading}</h2>
       <p>{snippet}</p>
     </SectionHeader>
-    <ul class="accordion">
+    <ul class="accordion" data-enter="bottom" data-group data-stagger="0.1">
       {
         faqs_list.map((faq, i) => (
           <li class="acc-item" data-state="inactive" data-id={i}>
@@ -68,7 +68,7 @@ let { heading, snippet, text, url, faqs_list } = features
         ))
       }
     </ul>
-    <a href={url} class="button">{text}</a>
+    <a href={url} class="button" data-enter>{text}</a>
   </div>
 </section>
 
@@ -96,11 +96,11 @@ let { heading, snippet, text, url, faqs_list } = features
   .icon {
     color: var(--accent-1);
     transition: color 0.3s var(--ease-4), rotate 0.3s var(--ease-4);
-  }
 
-  [data-state='active'] .icon {
-    color: var(--accent-2);
-    rotate: -180deg;
+    @nest [data-state='active'] & {
+      color: var(--accent-2);
+      rotate: -180deg;
+    }
   }
 
   .acc-panel {

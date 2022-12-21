@@ -5,6 +5,7 @@ import feather from 'feather-icons'
 
 type Social = 'facebook' | 'twitter' | 'instagram' | 'linkedin'
 
+let { logo, alt_logo } = global
 let { links, call_to_action, social_links } = navigation
 ---
 
@@ -33,13 +34,8 @@ let { links, call_to_action, social_links } = navigation
     <div class="logo light">
       <a href="/">
         {
-          global.logo && (
-            <img
-              src={global.logo.image}
-              alt={global.logo.alt}
-              width="148"
-              height="25"
-            />
+          logo && (
+            <img src={logo.image} alt={logo.alt} width="148" height="25" />
           )
         }
       </a>
@@ -47,10 +43,10 @@ let { links, call_to_action, social_links } = navigation
     <div class="logo dark">
       <a href="/">
         {
-          global.alt_logo && (
+          alt_logo && (
             <img
-              src={global.alt_logo.image}
-              alt={global.alt_logo.alt}
+              src={alt_logo.image}
+              alt={alt_logo.alt}
               width="148"
               height="25"
             />
@@ -68,10 +64,10 @@ let { links, call_to_action, social_links } = navigation
       <div class="top-bar">
         <a href="/">
           {
-            global.alt_logo && (
+            alt_logo && (
               <img
-                src={global.alt_logo.image}
-                alt={global.alt_logo.alt}
+                src={alt_logo.image}
+                alt={alt_logo.alt}
                 width="148"
                 height="25"
               />
@@ -186,7 +182,7 @@ let { links, call_to_action, social_links } = navigation
       position: fixed;
       inset: 0;
       background-color: hsl(var(--text-1-hsl) / 90%);
-      transition: opacity 0.5s var(--ease-4), visibilty 0.5s;
+      transition: all 0.5s var(--ease-4);
       opacity: 0;
       visibility: hidden;
 

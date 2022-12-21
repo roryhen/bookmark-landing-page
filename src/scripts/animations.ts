@@ -20,7 +20,7 @@ export async function scrollAnimate() {
     let timeline = gsap.timeline({
       scrollTrigger: {
         trigger: node,
-        start: 'top 90%',
+        start: 'top bottom',
       },
     })
 

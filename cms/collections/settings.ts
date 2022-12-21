@@ -38,6 +38,14 @@ export const settings: CmsCollection = {
           required: false,
           fields: Image,
         },
+        {
+          label: 'Footer Logo',
+          name: 'footer_logo',
+          hint: 'For logo in footer',
+          widget: 'object',
+          required: false,
+          fields: Image,
+        },
       ],
     },
     {

@@ -1,0 +1,109 @@
+---
+import navigation from '$content/navigation.json'
+import global from '$content/global.json'
+import feather from 'feather-icons'
+
+type Social = 'facebook' | 'twitter' | 'instagram' | 'linkedin'
+
+let { footer_logo } = global
+let { links, social_links } = navigation
+---
+
+<footer class="desktop-layout" id="more-info">
+  <div class="footer">
+    <div class="logo" data-enter>
+      <a href="/">
+        {
+          footer_logo && (
+            <img
+              src={footer_logo.image}
+              alt={footer_logo.alt}
+              width="148"
+              height="25"
+            />
+          )
+        }
+      </a>
+    </div>
+    <ul class="links" data-enter="bottom" data-group data-stagger="0.1">
+      {
+        links.map((link) => (
+          <li>
+            <a href={link.url} class="link">
+              {link.text}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <ul class="social" data-enter data-delay="1">
+      {
+        social_links.map(({ platform, url }) => (
+          <li>
+            <a
+              class="social-link"
+              href={url}
+              set:html={feather.icons[platform.toLowerCase() as Social].toSvg({
+                width: 32,
+                height: 32,
+              } as feather.FeatherAttributes)}
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <style>
+    .desktop-layout {
+      background-color: hsl(229 31% 21%);
+      overflow: hidden;
+    }
+
+    .footer {
+      padding: var(--size-8) var(--size-5);
+      display: grid;
+      justify-content: center;
+      place-items: center;
+      text-align: center;
+      gap: var(--size-8);
+
+      @media (--md-n-above) {
+        padding: var(--size-6) var(--size-5);
+        grid-template-columns: auto 1fr auto;
+      }
+    }
+
+    .links {
+      display: grid;
+      gap: var(--size-6) var(--size-8);
+
+      @media (--md-n-above) {
+        justify-self: start;
+        font-size: var(--font-size-0);
+        grid-auto-flow: column;
+      }
+    }
+
+    .link {
+      --text-3: var(--surface-0);
+    }
+
+    .social {
+      display: grid;
+      grid-auto-flow: column;
+      gap: var(--size-6);
+    }
+
+    .social-link {
+      color: var(--surface-0);
+
+      @media (--md-n-above) {
+        & :global(svg) {
+          inline-size: var(--size-5);
+          block-size: var(--size-5);
+        }
+      }
+    }
+  </style>
+</footer>

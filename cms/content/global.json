@@ -7,5 +7,9 @@
   "alt_logo": {
     "image": "/uploads/logo-bookmark-white.svg",
     "alt": "bookmark white logo"
+  },
+  "footer_logo": {
+    "image": "/uploads/logo-bookmark-light.svg",
+    "alt": "bookmark logo white text"
   }
 }

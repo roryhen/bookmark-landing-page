@@ -16,15 +16,15 @@
   "social_links": [
     {
       "platform": "Facebook",
-      "url": "https://facebook.com/example"
+      "url": "#facebook"
     },
     {
       "platform": "Twitter",
-      "url": "https://twitter.com/example"
+      "url": "#twitter"
     }
   ],
   "call_to_action": {
     "text": "Login",
-    "url": "/#login"
+    "url": "#login"
   }
 }

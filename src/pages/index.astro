@@ -4,6 +4,7 @@ import Hero from '../components/Hero.astro'
 import Features from '../components/Features.astro'
 import Integrations from 'src/components/Integrations.astro'
 import FAQ from 'src/components/FAQ.astro'
+import Newsletter from 'src/components/Newsletter.astro'
 ---
 
 <Layout>
@@ -12,11 +13,12 @@ import FAQ from 'src/components/FAQ.astro'
     <Features />
     <Integrations />
     <FAQ />
-  </main>
+    <Newsletter />
 
-  <style>
-    main {
-      overflow: hidden;
-    }
-  </style>
+    <style>
+      main {
+        overflow: hidden;
+      }
+    </style>
+  </main>
 </Layout>

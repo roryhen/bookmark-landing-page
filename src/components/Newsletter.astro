@@ -1,0 +1,148 @@
+---
+import newsletter from '$content/sections/newsletter.json'
+
+let { heading, subheading, placeholder, button } = newsletter
+---
+
+<script>
+  type FormState = 'initial' | 'submitting' | 'error' | 'success'
+  let formState: FormState = 'initial'
+</script>
+
+<section class="desktop-layout">
+  <div class="section-padding newsletter">
+    <p class="subheading" data-enter="bottom">{subheading}</p>
+    <h2 class="heading" data-enter="bottom">{heading}</h2>
+
+    <form class="form" data-enter data-delay="0.5">
+      <div class="status">
+        <input class="input" type="email" placeholder={placeholder} />
+        <span class="error-icon">!</span>
+        <div class="error">Make sure it's a valid email format</div>
+      </div>
+      <div class="buttons">
+        <button class="button" type="submit">{button}</button>
+        <button class="button success" disabled>You're in!</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<style>
+  .desktop-layout {
+    background-color: var(--accent-1);
+  }
+
+  .section-padding {
+    padding-block: var(--size-9);
+  }
+
+  .newsletter {
+    color: var(--surface-0);
+    text-align: center;
+    display: grid;
+    grid-template-columns: minmax(0, 30rem);
+    justify-content: center;
+    gap: var(--size-3);
+
+    @media (--md-n-above) {
+      gap: var(--size-7);
+    }
+  }
+
+  .subheading {
+    color: var(--surface-0);
+    text-transform: uppercase;
+    letter-spacing: var(--size-1);
+    font-size: var(--font-size-0);
+  }
+
+  .heading {
+    color: var(--surface-0);
+  }
+
+  .form {
+    display: grid;
+    gap: var(--size-3);
+    align-items: start;
+
+    @media (--md-n-above) {
+      grid-template-columns: 1fr auto;
+    }
+  }
+
+  .status {
+    position: relative;
+    padding: var(--border-size-2);
+    border-radius: calc(var(--radius-2) + 2px);
+    overflow: hidden;
+  }
+
+  .error,
+  .error-icon,
+  .success {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s var(--ease-3);
+  }
+
+  .error {
+    font-size: var(--font-size-0);
+    font-style: italic;
+    text-align: start;
+    padding: 0 var(--size-2);
+    max-block-size: 0;
+  }
+
+  .error-icon {
+    display: inline-block;
+    inline-size: var(--size-4);
+    block-size: var(--size-4);
+    position: absolute;
+    inset: var(--size-3) var(--size-3) var(--size-3) auto;
+    border-radius: var(--radius-round);
+    background-color: var(--accent-2);
+  }
+
+  .status:has(:invalid:not(:focus)) {
+    background-color: var(--accent-2);
+    block-size: 100%;
+
+    & .error-icon,
+    & .error {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    & .error {
+      padding: var(--size-1) var(--size-2);
+      max-block-size: var(--size-7);
+    }
+  }
+
+  .input {
+    border: 0;
+    inline-size: 100%;
+    font-size: var(--font-size-1);
+    line-height: var(--font-lineheight-0);
+    padding: var(--size-3);
+    border-radius: var(--radius-2);
+  }
+
+  .button {
+    margin: var(--border-size-2);
+    grid-area: 1 / 1;
+    padding: var(--size-3);
+    background-color: var(--accent-2);
+    box-shadow: none;
+  }
+
+  .button:hover,
+  .button:active {
+    --button-color: var(--accent-2);
+  }
+
+  .buttons {
+    display: grid;
+  }
+</style>
