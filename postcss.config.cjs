@@ -1,10 +1,14 @@
 const presetEnv = require('postcss-preset-env')
-const postcssGlobalData = require('@csstools/postcss-global-data')
+const globalData = require('@csstools/postcss-global-data')
+const jitProps = require('postcss-jit-props')
 
 module.exports = {
   plugins: [
-    postcssGlobalData({
+    globalData({
       files: [require.resolve('open-props/media')],
+    }),
+    jitProps({
+      files: [require.resolve('open-props/style')],
     }),
     presetEnv({
       stage: false,

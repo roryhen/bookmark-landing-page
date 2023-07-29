@@ -2,7 +2,10 @@
   "emmet.includeLanguages": {
     "astro": "html"
   },
-  "cssvar.files": ["./node_modules/open-props/open-props.min.css"],
+  "cssvar.files": [
+    "./node_modules/open-props/open-props.min.css",
+    "./src/layouts/Layout.astro"
+  ],
   "cssvar.ignore": [],
   "cssvar.extensions": ["css", "jsx", "tsx", "astro"]
 }
