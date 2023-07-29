@@ -194,7 +194,7 @@ let { heading, snippet, tabs } = features
     font-weight: var(--font-weight-4);
     color: var(--text-2);
 
-    @nest [data-state='active'] & {
+    [data-state='active'] & {
       color: var(--text-1);
     }
   }
@@ -227,7 +227,7 @@ let { heading, snippet, tabs } = features
     display: grid;
     grid-template: 1fr 4fr 1rem / 1fr 4fr 1fr;
 
-    @nest .tab-panel:first-child & {
+    .tab-panel:first-child & {
       grid-template: 1fr 4fr 1fr / 1fr 4fr 1fr;
     }
 

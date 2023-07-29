@@ -97,7 +97,7 @@ let { heading, snippet, text, url, faqs_list } = features
     color: var(--accent-1);
     transition: color 0.3s var(--ease-4), rotate 0.3s var(--ease-4);
 
-    @nest [data-state='active'] & {
+    [data-state='active'] & {
       color: var(--accent-2);
       rotate: -180deg;
     }

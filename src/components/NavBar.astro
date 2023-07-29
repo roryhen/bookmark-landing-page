@@ -186,7 +186,7 @@ let { links, call_to_action, social_links } = navigation
       opacity: 0;
       visibility: hidden;
 
-      @nest &[data-state='active'] {
+      &[data-state='active'] {
         opacity: 1;
         visibility: visible;
       }
@@ -208,7 +208,7 @@ let { links, call_to_action, social_links } = navigation
       transition: translate 0.5s var(--ease-4);
       translate: 0 var(--size-3);
 
-      @nest [data-state='active'] & {
+      [data-state='active'] & {
         translate: 0 0;
       }
     }

@@ -11,20 +11,20 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@fontsource/rubik": "^4.5.11",
-    "astro": "^1.6.11",
-    "astro-netlify-cms": "^0.3.4",
-    "embla-carousel": "^7.0.5",
+    "@fontsource/rubik": "^5.0.5",
+    "astro": "^2.9.3",
+    "astro-netlify-cms": "^0.5.3",
+    "embla-carousel": "^7.1.0",
     "feather-icons": "^4.29.0",
-    "gsap": "^3.11.3",
-    "open-props": "^1.5.1"
+    "gsap": "^3.12.2",
+    "open-props": "^1.5.10"
   },
   "devDependencies": {
-    "@types/feather-icons": "^4.29.0",
-    "postcss-preset-env": "^7.8.3",
-    "prettier": "^2.8.0",
-    "prettier-plugin-astro": "^0.7.0",
-    "vite-plugin-lightningcss": "^0.0.3"
+    "@csstools/postcss-global-data": "^2.0.1",
+    "@types/feather-icons": "^4.29.1",
+    "postcss-preset-env": "^9.1.0",
+    "prettier": "^3.0.0",
+    "prettier-plugin-astro": "^0.11.0"
   },
   "browserslist": [
     "> 1% and last 3 versions"
