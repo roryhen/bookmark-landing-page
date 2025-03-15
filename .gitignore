@@ -1,6 +1,8 @@
 # build output
+.astro/
 dist/
 .output/
+.stackbit/
 
 # dependencies
 node_modules/

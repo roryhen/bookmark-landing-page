@@ -1,6 +1,8 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
     "baseUrl": ".",
     "paths": {
       "$content/*": ["cms/content/*"]

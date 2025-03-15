@@ -1,127 +1,135 @@
+import type { Model } from '@stackbit/types'
 import { Link, Image, CTABlock } from '../common-types'
-import type { CmsCollection } from 'netlify-cms-core'
 
-export const sections: CmsCollection = {
+export const sections: Model = {
   label: 'Sections',
   name: 'pages',
-  editor: { preview: false },
-  files: [
+  type: 'page',
+  filePath: 'content/sections/{slug}.json',
+  fields: [
     {
       label: 'Hero',
       name: 'hero',
-      file: 'cms/content/sections/hero.json',
+      type: 'object',
       fields: CTABlock,
     },
     {
       label: 'Features',
       name: 'features',
-      file: 'cms/content/sections/features.json',
+      type: 'object',
       fields: [
         {
           label: 'Heading',
           name: 'heading',
-          widget: 'string',
+          type: 'string',
           required: false,
         },
         {
           label: 'Snippet',
           name: 'snippet',
-          widget: 'text',
+          type: 'text',
           required: false,
         },
         {
           label: 'Tabs',
           name: 'tabs',
-          widget: 'list',
-          fields: [
-            {
-              label: 'Tab Title',
-              name: 'tab_title',
-              widget: 'string',
-            },
-            {
-              label: 'Tab Content',
-              name: 'tab_content',
-              widget: 'object',
-              fields: CTABlock,
-            },
-          ],
-          max: 3,
+          type: 'list',
+          items: {
+            type: 'object',
+            fields: [
+              {
+                label: 'Tab Title',
+                name: 'tab_title',
+                type: 'string',
+              },
+              {
+                label: 'Tab Content',
+                name: 'tab_content',
+                type: 'object',
+                fields: CTABlock,
+              },
+            ],
+          },
         },
       ],
     },
     {
       label: 'Integrations',
       name: 'integrations',
-      file: 'cms/content/sections/integrations.json',
+      type: 'object',
       fields: [
         {
           label: 'Heading',
           name: 'heading',
-          widget: 'string',
+          type: 'string',
           required: false,
         },
         {
           label: 'Snippet',
           name: 'snippet',
-          widget: 'text',
+          type: 'text',
           required: false,
         },
         {
           label: 'Integration',
           name: 'integration',
-          widget: 'list',
-          fields: [
-            ...Image,
-            {
-              label: 'Title',
-              name: 'title',
-              widget: 'string',
-            },
-            {
-              label: 'Detail',
-              name: 'detail',
-              widget: 'string',
-            },
-            ...Link,
-          ],
-          max: 3,
+          type: 'list',
+          items: {
+            type: 'object',
+            fields: [
+              ...Image,
+              {
+                label: 'Title',
+                name: 'title',
+                type: 'string',
+              },
+              {
+                label: 'Detail',
+                name: 'detail',
+                type: 'string',
+              },
+              ...Link,
+            ],
+          },
         },
       ],
     },
     {
       label: 'FAQs',
       name: 'faqs',
-      file: 'cms/content/sections/faqs.json',
+      type: 'object',
       fields: [
         {
           label: 'Heading',
           name: 'heading',
-          widget: 'string',
+          type: 'string',
           required: false,
         },
         {
           label: 'Snippet',
           name: 'snippet',
-          widget: 'text',
+          type: 'text',
           required: false,
         },
         {
           label: 'FAQs List',
           name: 'faqs_list',
-          widget: 'list',
-          fields: [
-            {
-              label: 'Question',
-              name: 'question',
-              widget: 'string',
-            },
-            {
-              label: 'Answer',
-              name: 'answer',
-              widget: 'text',
-            },
-          ],
+          type: 'list',
+          items: {
+            type: 'object',
+            fields: [
+              {
+                label: 'Question',
+                name: 'question',
+                type: 'string',
+              },
+              {
+                label: 'Answer',
+                name: 'answer',
+                type: 'text',
+              },
+            ],
+          },
         },
         ...Link,
       ],
@@ -129,30 +137,30 @@ export const sections: CmsCollection = {
     {
       label: 'Newsletter',
       name: 'newsletter',
-      file: 'cms/content/sections/newsletter.json',
+      type: 'object',
       fields: [
         {
           label: 'Subheading',
           name: 'subheading',
-          widget: 'string',
+          type: 'string',
           required: false,
         },
         {
           label: 'Heading',
           name: 'heading',
-          widget: 'string',
+          type: 'string',
           required: false,
         },
         {
           label: 'Form placeholder',
           name: 'placeholder',
-          widget: 'string',
+          type: 'string',
           required: false,
         },
         {
           label: 'Form button',
           name: 'button',
-          widget: 'string',
+          type: 'string',
           required: false,
         },
       ],

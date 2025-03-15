@@ -1,48 +1,50 @@
+import type { Model } from '@stackbit/types'
 import { Link, Image } from '../common-types'
-import type { CmsCollection } from 'netlify-cms-core'
 
-export const settings: CmsCollection = {
+export const settings: Model = {
   label: 'Settings',
   name: 'settings',
-  editor: { preview: false },
-  files: [
+  type: 'data',
+  singleInstance: true,
+  filePath: 'content/settings.json',
+  fields: [
     {
       label: 'Global',
       name: 'global',
-      file: 'cms/content/global.json',
+      type: 'object',
       fields: [
         {
           label: 'Site Name',
           name: 'site_name',
-          widget: 'string',
+          type: 'string',
           required: false,
         },
         {
           label: 'Site Description',
           name: 'site_desc',
-          widget: 'text',
+          type: 'text',
           required: false,
         },
         {
           label: 'Logo',
           name: 'logo',
-          widget: 'object',
+          type: 'object',
           required: false,
           fields: Image,
         },
         {
           label: 'Alternate Logo',
           name: 'alt_logo',
-          hint: 'For mobile menu',
-          widget: 'object',
+          description: 'For mobile menu',
+          type: 'object',
           required: false,
           fields: Image,
         },
         {
           label: 'Footer Logo',
           name: 'footer_logo',
-          hint: 'For logo in footer',
-          widget: 'object',
+          description: 'For logo in footer',
+          type: 'object',
           required: false,
           fields: Image,
         },
@@ -51,39 +53,37 @@ export const settings: CmsCollection = {
     {
       label: 'Navigation',
       name: 'navigation',
-      file: 'cms/content/navigation.json',
+      type: 'object',
       fields: [
         {
           label: 'Navigation Links',
           name: 'links',
-          widget: 'list',
-          summary: 'Link: {{fields.text}} - {{fields.url}}',
-          fields: Link,
-          max: 5,
+          type: 'list',
+          items: { type: 'object', fields: Link },
         },
         {
           label: 'Call to action',
           name: 'call_to_action',
-          widget: 'object',
+          type: 'object',
           required: false,
-          summary: 'Button: {{fields.text}} - {{fields.url}}',
           fields: Link,
         },
         {
           label: 'Social Links',
           name: 'social_links',
-          widget: 'list',
-          summary: 'Link: {{fields.text}} - {{fields.url}}',
-          fields: [
-            {
-              label: 'Platform',
-              name: 'platform',
-              widget: 'select',
-              options: ['Facebook', 'Instagram', 'Twitter', 'TikTok'],
-            },
-            { label: 'Link url', name: 'url', widget: 'string' },
-          ],
-          max: 4,
+          type: 'list',
+          items: {
+            type: 'object',
+            fields: [
+              {
+                label: 'Platform',
+                name: 'platform',
+                type: 'enum',
+                options: ['Facebook', 'Instagram', 'Twitter', 'TikTok'],
+              },
+              { label: 'Link url', name: 'url', type: 'string' },
+            ],
+          },
         },
       ],
     },

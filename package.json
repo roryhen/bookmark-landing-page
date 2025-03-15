@@ -5,28 +5,29 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
+    "start": "stackbit dev --port 4321",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@fontsource/rubik": "^5.0.5",
-    "astro": "^2.9.3",
-    "astro-netlify-cms": "^0.5.3",
+    "@fontsource/rubik": "^5.2.5",
+    "astro": "^5.5.2",
     "embla-carousel": "^7.1.0",
-    "feather-icons": "^4.29.0",
-    "gsap": "^3.12.2",
-    "open-props": "^1.5.10"
+    "feather-icons": "^4.29.2",
+    "gsap": "^3.12.7",
+    "open-props": "^1.7.13"
   },
   "devDependencies": {
-    "@csstools/postcss-global-data": "^2.0.1",
-    "@types/feather-icons": "^4.29.1",
-    "netlify-cms-app": "^2.15.72",
-    "postcss-jit-props": "^1.0.13",
-    "postcss-preset-env": "^9.1.0",
-    "prettier": "^3.0.0",
-    "prettier-plugin-astro": "^0.11.0"
+    "@csstools/postcss-global-data": "^2.1.1",
+    "@stackbit/cli": "^0.3.133",
+    "@stackbit/cms-git": "^1.0.35",
+    "@stackbit/types": "^2.1.14",
+    "@types/feather-icons": "^4.29.4",
+    "postcss-jit-props": "^1.0.16",
+    "postcss-preset-env": "^9.6.0",
+    "prettier": "^3.5.3",
+    "prettier-plugin-astro": "^0.14.1"
   },
   "browserslist": [
     "> 1% and last 3 versions"

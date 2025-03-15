@@ -1,16 +1,15 @@
-import NetlifyCMS from 'astro-netlify-cms'
-import { sections } from './collections/sections'
+import { GitContentSource } from '@stackbit/cms-git'
 import { settings } from './collections/settings'
+import { sections } from './collections/sections'
 
-export const netlifyCMSConfig = NetlifyCMS({
-  config: {
-    backend: {
-      name: 'git-gateway',
-      branch: 'main',
-    },
-    site_url: 'https://bookmarkmanagersite.netlify.app/',
-    media_folder: 'public/uploads',
-    public_folder: '/uploads',
-    collections: [settings, sections],
+export const cmsConfig = new GitContentSource({
+  rootPath: __dirname,
+  contentDirs: ['content'],
+  models: [settings, sections],
+  assetsConfig: {
+    referenceType: 'static',
+    staticDir: 'public',
+    uploadDir: 'uploads',
+    publicPath: '/',
   },
 })

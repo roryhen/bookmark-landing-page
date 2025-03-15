@@ -1,4 +1,6 @@
+//@ts-ignore
 const presetEnv = require('postcss-preset-env')
+//@ts-ignore
 const globalData = require('@csstools/postcss-global-data')
 const jitProps = require('postcss-jit-props')
 
@@ -7,6 +9,7 @@ module.exports = {
     globalData({
       files: [require.resolve('open-props/media')],
     }),
+    //@ts-ignore
     jitProps({
       files: [require.resolve('open-props/style')],
     }),

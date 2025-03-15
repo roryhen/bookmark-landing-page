@@ -4,11 +4,6 @@ import newsletter from '$content/sections/newsletter.json'
 let { heading, subheading, placeholder, button } = newsletter
 ---
 
-<script>
-  type FormState = 'initial' | 'submitting' | 'error' | 'success'
-  let formState: FormState = 'initial'
-</script>
-
 <section class="desktop-layout">
   <div class="section-padding newsletter">
     <p class="subheading" data-enter="bottom">{subheading}</p>

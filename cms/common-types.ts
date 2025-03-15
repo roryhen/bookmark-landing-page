@@ -1,60 +1,59 @@
-import type { CmsField } from 'netlify-cms-core'
+import type { Field } from '@stackbit/types'
 
 // Compound content types (use with 'object' or 'list' widget)
-export const Link: CmsField[] = [
+export const Link: Field[] = [
   {
     label: 'Link text',
     name: 'text',
-    widget: 'string',
+    type: 'string',
     required: false,
   },
   {
     label: 'Link url',
     name: 'url',
-    widget: 'string',
+    type: 'string',
     required: false,
   },
 ]
 
-export const Image: CmsField[] = [
+export const Image: Field[] = [
   {
     label: 'Image',
     name: 'image',
-    widget: 'image',
+    type: 'image',
     required: false,
   },
   {
     label: 'Alt text',
     name: 'alt',
-    widget: 'string',
+    type: 'string',
     required: false,
   },
 ]
 
-export const CTABlock: CmsField[] = [
+export const CTABlock: Field[] = [
   {
     label: 'Heading',
     name: 'heading',
-    widget: 'string',
+    type: 'string',
     required: false,
   },
   {
     label: 'Snippet',
     name: 'snippet',
-    widget: 'text',
+    type: 'text',
     required: false,
   },
   {
     label: 'Buttons',
     name: 'buttons',
-    widget: 'list',
-    fields: Link,
-    max: 2,
+    type: 'list',
+    items: { type: 'object', fields: Link },
   },
   {
     label: 'Featured Image',
     name: 'featured_image',
-    widget: 'object',
+    type: 'object',
     fields: Image,
   },
 ]
