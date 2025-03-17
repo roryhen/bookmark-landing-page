@@ -5,7 +5,7 @@
     "checkJs": true,
     "baseUrl": ".",
     "paths": {
-      "$content/*": ["cms/content/*"]
+      "$content/*": ["content/*"]
     }
   }
 }

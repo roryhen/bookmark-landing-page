@@ -1,8 +1,7 @@
 import type { Model } from '@stackbit/types'
 import { Link, Image } from '../common-types'
 
-export const settings: Model = {
-  label: 'Settings',
+export const Settings: Model = {
   name: 'settings',
   type: 'data',
   singleInstance: true,

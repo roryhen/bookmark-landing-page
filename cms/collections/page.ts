@@ -1,11 +1,11 @@
 import type { Model } from '@stackbit/types'
 import { Link, Image, CTABlock } from '../common-types'
 
-export const sections: Model = {
-  label: 'Sections',
-  name: 'pages',
+export const Home: Model = {
+  name: 'home',
   type: 'page',
-  filePath: 'content/sections/{slug}.json',
+  filePath: 'content/pages/{slug}.json',
+  urlPath: '/',
   fields: [
     {
       label: 'Hero',

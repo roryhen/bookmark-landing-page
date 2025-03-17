@@ -1,11 +1,11 @@
 import { GitContentSource } from '@stackbit/cms-git'
-import { settings } from './collections/settings'
-import { sections } from './collections/sections'
+import { Settings } from './collections/settings'
+import { Home } from './collections/page'
 
 export const cmsConfig = new GitContentSource({
   rootPath: __dirname,
   contentDirs: ['content'],
-  models: [settings, sections],
+  models: [Settings, Home],
   assetsConfig: {
     referenceType: 'static',
     staticDir: 'public',

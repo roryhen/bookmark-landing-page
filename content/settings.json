@@ -1,0 +1,49 @@
+{
+  "type": "settings",
+  "global": {
+    "site_name": "Bookmark - A Simple Bookmark Manager",
+    "logo": {
+      "image": "/uploads/logo-bookmark.svg",
+      "alt": "bookmark logo"
+    },
+    "alt_logo": {
+      "image": "/uploads/logo-bookmark-white.svg",
+      "alt": "bookmark white logo"
+    },
+    "footer_logo": {
+      "image": "/uploads/logo-bookmark-light.svg",
+      "alt": "bookmark logo white text"
+    }
+  },
+  "navigation": {
+    "links": [
+      {
+        "text": "Features",
+        "url": "#features"
+      },
+      {
+        "text": "Pricing",
+        "url": "#pricing"
+      },
+      {
+        "text": "Contact",
+        "url": "#contact"
+      }
+    ],
+    "social_links": [
+      {
+        "platform": "Facebook",
+        "url": "#facebook"
+      },
+      {
+        "platform": "Twitter",
+        "url": "#twitter"
+      }
+    ],
+    "call_to_action": {
+      "text": "Login",
+      "url": "#login"
+    }
+  }
+}
+

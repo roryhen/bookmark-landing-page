@@ -1,9 +1,9 @@
 ---
-import features from '$content/sections/faqs.json'
+import { faqs } from '$content/pages/home.json'
 import SectionHeader from './SectionHeader.astro'
 import feather from 'feather-icons'
 
-let { heading, snippet, text, url, faqs_list } = features
+let { heading, snippet, text, url, faqs_list } = faqs
 ---
 
 <script>
@@ -95,7 +95,9 @@ let { heading, snippet, text, url, faqs_list } = features
 
   .icon {
     color: var(--accent-1);
-    transition: color 0.3s var(--ease-4), rotate 0.3s var(--ease-4);
+    transition:
+      color 0.3s var(--ease-4),
+      rotate 0.3s var(--ease-4);
 
     [data-state='active'] & {
       color: var(--accent-2);
