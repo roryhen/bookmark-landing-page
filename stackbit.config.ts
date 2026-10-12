@@ -1,5 +1,5 @@
 import { defineStackbitConfig } from '@stackbit/types'
-import { cmsConfig } from 'cms/config'
+import { cmsConfig } from './cms/config'
 
 export default defineStackbitConfig({
   stackbitVersion: '~0.6.0',
